@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>For My Love | Forever Yours ❤️</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Dancing+Script:wght@400;500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons (Free CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(145deg, #ffdde1 0%, #f9c9d4 100%);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            cursor: default;
+        }
+
+        /* Custom cursor glow trail (simple glow effect) */
+        .cursor-glow {
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, rgba(255,105,180,0.6), rgba(255,20,147,0.2));
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.05s linear;
+            mix-blend-mode: screen;
+            box-shadow: 0 0 15px rgba(255, 80, 120, 0.8);
+        }
+
+        /* Floating hearts container */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            color: #ff4d6d;
+            opacity: 0.6;
+            animation: floatHeart 8s linear infinite;
+            user-select: none;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* main content */
+        .site-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+
+        section {
+            padding: 80px 24px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* Hero section full screen */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at 20% 40%, rgba(255, 215, 225, 0.8), rgba(255, 200, 210, 0.6));
+            border-radius: 0;
+            flex-direction: column;
+            gap: 30px;
+            backdrop-filter: blur(2px);
+        }
+
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(3rem, 12vw, 6rem);
+            color: #b0003a;
+            text-shadow: 0 0 15px rgba(255, 105, 180, 0.8), 2px 2px 10px rgba(0,0,0,0.1);
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: #a13e5c;
+            font-weight: 500;
+            max-width: 600px;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-btn {
+            background: linear-gradient(45deg, #ff4d6d, #ff8c94);
+            border: none;
+            padding: 14px 42px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: white;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 18px 30px rgba(255, 60, 100, 0.6);
+        }
+
+        /* hidden sections initially */
+        .hidden-content {
+            display: none;
+        }
+
+        /* Love letter */
+        .love-letter {
+            background: rgba(255, 248, 245, 0.85);
+            border-radius: 48px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 50px 30px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            margin: 40px auto;
+        }
+
+        .letter-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #c9184a;
+        }
+
+        .typewriter {
+            font-size: 1.3rem;
+            font-weight: 400;
+            font-family: 'Playfair Display', serif;
+            color: #3d2b2b;
+            background: #fff0f3;
+            padding: 30px;
+            border-radius: 35px;
+            max-width: 800px;
+            margin: 30px auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+
+        /* Gallery grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 32px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+            transition: transform 0.4s, box-shadow 0.3s;
+            cursor: pointer;
+            background: #ffecf0;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.25);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Reasons section */
+        .reasons-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            margin: 50px 0;
+        }
+
+        .reason-card {
+            background: white;
+            width: 260px;
+            padding: 25px 15px;
+            border-radius: 35px;
+            text-align: center;
+            transition: all 0.4s;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+            background: #fff5f7;
+        }
+
+        .reason-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reason-card i {
+            font-size: 2.5rem;
+            color: #ff4d6d;
+        }
+
+        .reason-card h3 {
+            font-size: 1.5rem;
+            margin: 15px 0;
+        }
+
+        /* Countdown */
+        .countdown-box {
+            background: rgba(255, 235, 240, 0.9);
+            padding: 35px;
+            border-radius: 60px;
+            text-align: center;
+            margin: 50px auto;
+            max-width: 550px;
+            backdrop-filter: blur(5px);
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            font-family: monospace;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #c9184a;
+        }
+
+        .timer div {
+            background: #ffeef4;
+            padding: 15px 20px;
+            border-radius: 50px;
+            min-width: 90px;
+        }
+
+        /* Music Player */
+        .music-player {
+            background: #ffe2eb;
+            border-radius: 80px;
+            padding: 10px 25px;
+            display: inline-flex;
+            align-items: center;
+            gap: 18px;
+            margin: 20px auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .music-btn {
+            background: #ff4d6d;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Surprise button */
+        .surprise-area {
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .love-question {
+            background: #ff477e;
+            color: white;
+            padding: 14px 28px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 80px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: bold;
+        }
+
+        .move-btn {
+            position: relative;
+        }
+
+        /* Heart explosion */
+        .heart-explosion {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .explode-heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: explodeAnim 1s ease-out forwards;
+        }
+
+        @keyframes explodeAnim {
+            0% {
+                transform: scale(0.3) translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5) translate(var(--tx, 0px), var(--ty, -100px));
+                opacity: 0;
+            }
+        }
+
+        footer {
+            background: #b23c5c;
+            color: #fff0e6;
+            text-align: center;
+            padding: 30px;
+            font-size: 1.2rem;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* scroll reveal */
+        .fade-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Lightbox modal */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            cursor: pointer;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 20px;
+            box-shadow: 0 0 35px white;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .timer div {
+                min-width: 65px;
+                font-size: 1.3rem;
+            }
+            .reason-card {
+                width: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="hearts-bg" id="heartsContainer"></div>
+<div class="site-wrapper">
+    <!-- Hero Section -->
+    <section class="hero" id="heroSection">
+        <h1>For Jyoti❤️</h1>
+        <p>"Sirf tumhare liye ."</p>
+        <button class="hero-btn" id="openHeartBtn">✨ Open My Heart ✨</button>
+    </section>
+
+    <div id="mainContent" class="hidden-content">
+        <!-- Love Letter Section -->
+        <section class="love-letter fade-scroll" id="letterSection">
+            <h2 class="letter-title">💌 A Letter Just for You 💌</h2>
+            <div class="typewriter" id="typewriterText"></div>
+        </section>
+
+        <!-- Memories Gallery -->
+        <section class="fade-scroll">
+            <h2 style="text-align:center; font-family:'Dancing Script'; font-size:3rem; color:#b2224c;">Sweet pictures 📸</h2>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Images from Unsplash romantic collection (free use) -->
+                <div class="gallery-item"><img src="1.jpg" alt="Romantic memory 1"></div>
+                <div class="gallery-item"><img src="2.jpg" alt="Romantic memory 2"></div>
+                <div class="gallery-item"><img src="3.jpg" alt="Romantic memory 3"></div>
+                <div class="gallery-item"><img src="4.jpg" alt="Romantic memory 4"></div>
+            </div>
+        </section>
+
+        <!-- Reasons I Love You -->
+        <section class="fade-scroll">
+            <h2 style="text-align:center; font-family:'Dancing Script'; font-size:3rem;">💖 Reasons I Love You 💖</h2>
+            <div class="reasons-container" id="reasonsContainer">
+                <div class="reason-card"><i class="fas fa-smile"></i><h3>Tumhara Smile</h3><p>sabse best muskan 😊</p></div>
+                <div class="reason-card"><i class="fas fa-heart"></i><h3>Tumhara Dil</h3><p>Bohot pure or saaf hai</p></div>
+                <div class="reason-card"><i class="fas fa-star"></i><h3>Tumhara pyar</h3><p>feel hota hai</p></div>
+                <div class="reason-card"><i class="fas fa-hand-holding-heart"></i><h3>Tumhara har ek chiz</h3><p>ek ho to bola jaye par tumhara to har ek chiz acha hai meri jaan</p></div>
+            </div>
+        </section>
+
+        <!-- Countdown Timer -->
+        <section class="fade-scroll">
+            <div class="countdown-box">
+                <h2>💗 Next Special Day 💗</h2>
+                <div class="timer" id="countdownTimer">
+                    <div><span id="days">00</span><br>Days</div>
+                    <div><span id="hours">00</span><br>Hours</div>
+                    <div><span id="minutes">00</span><br>Mins</div>
+                    <div><span id="seconds">00</span><br>Secs</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Music Player -->
+        <section style="text-align:center;" class="fade-scroll">
+            <div class="music-player">
+                <i class="fas fa-music" style="color:#ff4d6d;"></i>
+                <span>Romantic Melody</span>
+                <button class="music-btn" id="playPauseBtn">🎵 Play</button>
+            </div>
+        </section>
+
+        <!-- Interactive Surprise -->
+        <section class="surprise-area fade-scroll">
+            <button class="love-question" id="loveQuestionBtn">💘 Do You Love Me? 💘</button>
+            <div id="surpriseResponse" style="margin-top:20px; font-size:1.5rem;"></div>
+        </section>
+
+        <footer>
+            Yours Abdul Rehman ❤️ 
+        </footer>
+    </div>
+</div>
+
+<script>
+    // Floating hearts generation
+    function createFloatingHearts() {
+        const heartsContainer = document.getElementById('heartsContainer');
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = ['❤️','💖','💗','💕','💓'][Math.floor(Math.random()*5)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
+            heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            heart.style.opacity = Math.random() * 0.6 + 0.3;
+            heartsContainer.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 8000);
+        }, 700);
+    }
+    createFloatingHearts();
+
+    // Cursor Glow Trail
+    const cursorGlow = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+    });
+
+    // Reveal main content after "Open My Heart"
+    const openBtn = document.getElementById('openHeartBtn');
+    const mainContentDiv = document.getElementById('mainContent');
+    const heroSection = document.getElementById('heroSection');
+
+    openBtn.addEventListener('click', () => {
+        mainContentDiv.classList.remove('hidden-content');
+        mainContentDiv.style.display = 'block';
+        heroSection.style.minHeight = 'auto';
+        heroSection.style.paddingBottom = '40px';
+        // scroll to top after content reveal?
+        window.scrollTo({ top: heroSection.offsetHeight, behavior: 'smooth' });
+        startTypingEffect();
+        startCountdown();
+        initScrollReveal();
+        observeReasons();
+    });
+
+    // Typing effect for love letter
+    const letterText = ` Dear Jyoti, ✨\n\n Block krte krte ab baat na ho to heart ka nas block hojata hai\n\n  ❤️`;
+    const typewriterDiv = document.getElementById('typewriterText');
+    function startTypingEffect() {
+        if (typewriterDiv.innerText.length > 0) return;
+        let i = 0;
+        typewriterDiv.innerHTML = '';
+        function typing() {
+            if (i < letterText.length) {
+                typewriterDiv.innerHTML += letterText.charAt(i);
+                i++;
+                setTimeout(typing, 50);
+            }
+        }
+        typing();
+    }
+
+    // Countdown to next Valentine's Day (Feb 14)
+    function startCountdown() {
+        function updateTimer() {
+            const now = new Date();
+            let nextValentine = new Date(now.getFullYear(), 1, 14);
+            if (now > nextValentine) {
+                nextValentine = new Date(now.getFullYear() + 1, 1, 14);
+            }
+            const diff = nextValentine - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (86400000)) / 3600000);
+            const minutes = Math.floor((diff % 3600000) / 60000);
+            const seconds = Math.floor((diff % 60000) / 1000);
+            document.getElementById('days').innerText = days < 10 ? '0'+days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0'+hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0'+minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0'+seconds : seconds;
+        }
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    }
+
+    // Lightbox for gallery
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+    function showLightbox(src) {
+        const lightboxDiv = document.createElement('div');
+        lightboxDiv.classList.add('lightbox');
+        const img = document.createElement('img');
+        img.src = src;
+        lightboxDiv.appendChild(img);
+        document.body.appendChild(lightboxDiv);
+        lightboxDiv.addEventListener('click', () => lightboxDiv.remove());
+    }
+    galleryItems.forEach(img => {
+        img.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showLightbox(img.src);
+        });
+    });
+
+    // Scroll reveal (fade-scroll)
+    function initScrollReveal() {
+        const fadeElements = document.querySelectorAll('.fade-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        fadeElements.forEach(el => observer.observe(el));
+    }
+
+    // Reasons appear one by one on scroll
+    function observeReasons() {
+        const reasonCards = document.querySelectorAll('.reason-card');
+        const reasonObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    reasonObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        reasonCards.forEach(card => reasonObserver.observe(card));
+    }
+
+    // Music Player (fake audio using Web Audio? Use a silent audio context? Instead: use Audio element with a free romantic tune from assets? Since no external mp3? We'll create an oscillator? No, better to embed a silent mp3? Use simple Audio from online? For demo, create an audio object with a royalty free track? 
+    // To avoid CORS/autoplay issues, we can use a simple melody from a public sample? I will use a hidden audio element with an external short romantic music from freesound? For full functionality, we use an audio element and a sample track from GitHub? But better to use a simple sine wave? no.
+    // For demonstration: we use a Web Audio API simple synth? But user expects background music, but we can embed a public mp3 from 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' (royalty free demo). Let's pick a safe romantic instrumental.
+    let audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3');
+    audio.loop = true;
+    audio.volume = 0.3;
+    let isPlaying = false;
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    playPauseBtn.addEventListener('click', () => {
+        if (!isPlaying) {
+            audio.play().catch(e => console.log("Autoplay blocked, click again"));
+            playPauseBtn.innerHTML = '⏸️ Pause';
+            isPlaying = true;
+        } else {
+            audio.pause();
+            playPauseBtn.innerHTML = '🎵 Play';
+            isPlaying = false;
+        }
+    });
+
+    // Surprise "Do You Love Me?" with moving No and hearts explosion on Yes
+    const loveBtn = document.getElementById('loveQuestionBtn');
+    const surpriseDiv = document.getElementById('surpriseResponse');
+    let noMoveCount = 0;
+    let noButton = null; // we will create clone dynamic?
+
+    function createMovingNo() {
+        if (noButton) noButton.remove();
+        const movingBtn = document.createElement('button');
+        movingBtn.innerText = 'No 🙈';
+        movingBtn.style.background = '#a03e5c';
+        movingBtn.style.color = 'white';
+        movingBtn.style.border = 'none';
+        movingBtn.style.padding = '12px 28px';
+        movingBtn.style.borderRadius = '60px';
+        movingBtn.style.fontWeight = 'bold';
+        movingBtn.style.cursor = 'pointer';
+        movingBtn.style.marginLeft = '20px';
+        movingBtn.classList.add('move-btn');
+        loveBtn.parentNode.insertBefore(movingBtn, loveBtn.nextSibling);
+        movingBtn.addEventListener('mouseenter', () => {
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 100);
+            movingBtn.style.position = 'fixed';
+            movingBtn.style.left = x + 'px';
+            movingBtn.style.top = y + 'px';
+            movingBtn.style.zIndex = '9999';
+        });
+        movingBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            surpriseDiv.innerHTML = "💔 Hmm... Try again? 😘";
+            setTimeout(() => {
+                if(surpriseDiv.innerHTML.includes("Try again")) surpriseDiv.innerHTML = "";
+            }, 1200);
+        });
+        noButton = movingBtn;
+    }
+
+    function heartsExplosion() {
+        for (let i = 0; i < 80; i++) {
+            const heartEl = document.createElement('div');
+            heartEl.classList.add('explode-heart');
+            heartEl.innerHTML = ['❤️','💖','💗','💕','💓','💘'][Math.floor(Math.random()*6)];
+            heartEl.style.left = Math.random() * window.innerWidth + 'px';
+            heartEl.style.top = Math.random() * window.innerHeight + 'px';
+            heartEl.style.position = 'fixed';
+            heartEl.style.fontSize = (Math.random() * 30 + 18) + 'px';
+            const tx = (Math.random() - 0.5) * 200;
+            const ty = (Math.random() - 0.5) * 200 - 100;
+            heartEl.style.setProperty('--tx', tx + 'px');
+            heartEl.style.setProperty('--ty', ty + 'px');
+            document.body.appendChild(heartEl);
+            setTimeout(() => heartEl.remove(), 1000);
+        }
+        surpriseDiv.innerHTML = "🎉 YAY! I love you too! ❤️❤️❤️";
+        if (noButton) noButton.remove();
+        loveBtn.disabled = true;
+        loveBtn.style.opacity = 0.6;
+    }
+
+    loveBtn.addEventListener('click', () => {
+        // Show Yes/No interaction: Create a dialog-like? we replace button with two options?
+        // If we haven't yet created the moving no, ask confirmation
+        if (!noButton) {
+            createMovingNo();
+            // Change loveBtn text to Yes permanently and trigger hearts explosion on Yes click
+            const originalYes = loveBtn.innerText;
+            loveBtn.innerText = "Yes! ❤️";
+            loveBtn.style.background = "#d43f6b";
+            // remove old listener, add new permanent Yes
+            const newLoveBtn = loveBtn.cloneNode(true);
+            loveBtn.parentNode.replaceChild(newLoveBtn, loveBtn);
+            newLoveBtn.addEventListener('click', () => {
+                heartsExplosion();
+                if(noButton) noButton.remove();
+            });
+        } else {
+            // if no button exists already, handle Yes again
+            heartsExplosion();
+            if(noButton) noButton.remove();
+        }
+    });
+
+    // Fallback: ensure that no button moves away playfully.
+    // Also ensure hidden-content initially
+    mainContentDiv.style.display = 'none';
+    // optional: preload some images.
+    window.addEventListener('load', () => {
+        // preload nothing.
+        console.log("ready");
+    });
+</script>
+</body>
+</html>
